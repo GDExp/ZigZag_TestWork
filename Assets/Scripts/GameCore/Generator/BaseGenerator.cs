@@ -7,6 +7,8 @@ namespace ZigZag.GameCore
     {
         protected Queue<int> generatorQueueTitleValue;
         protected Random generatorRandom;
+        
+        protected float currentWeight;
 
         public BaseGenerator()
         {
@@ -22,5 +24,6 @@ namespace ZigZag.GameCore
         }
 
         public abstract void FillGeneratorNewValue();
+        public abstract bool CheckChanceByWeight(float weight);
     }
 }

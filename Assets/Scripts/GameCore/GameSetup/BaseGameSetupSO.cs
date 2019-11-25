@@ -10,8 +10,10 @@ namespace ZigZag.GameCore
         [Range(5f, 100f)]
         public float crystalChance;
 
+        public Material groundMaterials;
+
         public Rigidbody groundPrefab;
         public Rigidbody crystalPrefab;
-        public Rigidbody playerPrefab;
+        public ParticleSystem sparkPrefab;
     }
 }

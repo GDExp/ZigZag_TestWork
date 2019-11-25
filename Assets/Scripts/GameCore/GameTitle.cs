@@ -1,5 +1,5 @@
 ﻿public enum GameTitle
 {
     GroundTitle,
-    CristaleTitle,
+    CrystaleTitle,
 }

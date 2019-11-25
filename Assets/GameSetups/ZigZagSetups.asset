@@ -12,10 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3375ca000bb9e364594a7d441835507c, type: 3}
   m_Name: ZigZagSetups
   m_EditorClassIdentifier: 
-  gameSpeed: 1
+  gameSpeed: 4
   crystalChance: 20
+  groundMaterials: {fileID: 2100000, guid: d72ae436934c25240a6f5b8562006dcc, type: 2}
   groundPrefab: {fileID: 5327991593075744249, guid: b380ab4fa5368734b85329dc5ccb4af4,
     type: 3}
-  crystalPrefab: {fileID: 2240570686692361661, guid: ae4c2beb2d7fb9a4abe27eed9f24e082,
+  crystalPrefab: {fileID: 367916271459235340, guid: ae4c2beb2d7fb9a4abe27eed9f24e082,
     type: 3}
-  playerPrefab: {fileID: 0}
+  sparkPrefab: {fileID: 0}

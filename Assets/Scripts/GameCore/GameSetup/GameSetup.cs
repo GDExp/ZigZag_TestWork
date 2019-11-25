@@ -9,9 +9,11 @@ namespace ZigZag.GameCore
     {
         [SerializeField] private GameControlTrigger _gameControlTrigger;
         [SerializeField] private BaseGameSetupSO _currentGameSetup;
-        [SerializeField] private Vector3 _startPoint;
+        [SerializeField] private Vector3 _startPlayerPoint;
         public BaseGameSetupSO CurrentGameSetup { get => _currentGameSetup; }
         public IGameControlTrigger GameControlTrigger { get => _gameControlTrigger as IGameControlTrigger; }
-        public Vector3 StartPoint { get => _startPoint; }
+        public Vector3 StartPlayerPoint { get => _startPlayerPoint; }
+        [Range(0f,10f)]
+        public float cameraLimitValue;
     }
 }

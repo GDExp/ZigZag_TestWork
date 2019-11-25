@@ -33,11 +33,12 @@ namespace ZigZag.GameCore
                     poolObject = CreateNewObject(key);
                 }
             }
-
+            ActiveObjectInScene(poolObject);
             return poolObject;
         }
 
         public abstract ObjectType CreateNewObject(ObjectKey key);
+        public abstract void ActiveObjectInScene(ObjectType poolObject);
 
         public virtual void ReturnObjectInPool(ObjectKey key, ObjectType poolObject)
         {
@@ -54,6 +55,10 @@ namespace ZigZag.GameCore
                 if (currentObjectsList.Contains(poolObject)) return;
                 currentObjectsList.Add(poolObject);
             }
+            HideObjectInScene(poolObject);
         }
+
+        public abstract void HideObjectInScene(ObjectType poolObject);
+        
     }
 }
