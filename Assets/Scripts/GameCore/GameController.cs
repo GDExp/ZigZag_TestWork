@@ -14,6 +14,7 @@ namespace ZigZag.GameCore
         private BaseGameField _gameField;
         private BaseInputModule _currentBaseModule;
         private BaseCanvas _gameCanvas;
+        private SparkFXModule _fxModule;
         private Player _player;
         
         private GameSetup _currentGameSetup;
@@ -65,6 +66,7 @@ namespace ZigZag.GameCore
             CreateGameFiled();
             CreateInputModule();
             SetupPlayerObject();
+            CreateFXModule();
             SetupGameCanvas();
         }
 
@@ -79,7 +81,7 @@ namespace ZigZag.GameCore
             //_currentBaseModule = new SpaceInputModule();
             (_currentBaseModule as ISubject).Attach(this);
         }
-
+        
         private void SetupPlayerObject()
         {
             _player = FindObjectOfType<Player>();
@@ -89,6 +91,11 @@ namespace ZigZag.GameCore
             (_currentBaseModule as ISubject).Attach(_player);
         }
 
+        private void CreateFXModule()
+        {
+            _fxModule = new SparkFXModule(this, _player, _currentGameSetup);
+        }
+
         private void SetupGameCanvas()
         {
             _gameCanvas = FindObjectOfType<BaseCanvas>();
@@ -96,9 +103,13 @@ namespace ZigZag.GameCore
             _gameCanvas.ResetCanvasText();
         }
 
-        private void FixedUpdate()
+        private void Update()
         {
             _currentBaseModule.OnUpdate();
+        }
+
+        private void FixedUpdate()
+        {
             if (!_isGameRun) return;
             for (int i = 0; i < _updatableObectsList.Count; ++i) _updatableObectsList[i].OnUpdate();
         }

@@ -9,7 +9,7 @@ namespace ZigZag.GameCore
         [RuntimeInitializeOnLoadMethod]
         public static void NewGameInitialize()
         {
-            GameObject gameController = new GameObject(PrimeObjectName);
+            UnityEngine.GameObject gameController = new UnityEngine.GameObject(PrimeObjectName);
             gameController.AddComponent<GameController>();
         }
     }

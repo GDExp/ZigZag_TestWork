@@ -36,7 +36,8 @@ namespace ZigZag.Gameplay
             CreateStartField();
             for (int i = 0; i < 50; ++i) BuildGameField();
             //bug fix
-            _pool.ReturnObjectInPool(GameTitle.GroundTitle, groundTitles[_fixGroundTitleHash]);
+            if (_fixGroundTitleHash == 0) return;
+            _pool.ReturnObjectInPool(GameObjectEnum.GroundTitle, groundTitles[_fixGroundTitleHash]);
             groundTitles.Remove(_fixGroundTitleHash);
             _fixGroundTitleHash = 0;
         }
@@ -71,7 +72,7 @@ namespace ZigZag.Gameplay
         public override void TriggerAction(int objectHash)
         {
             if (!_gameController.IsGameRun) return;
-            GameTitle objectType = GameTitle.GroundTitle;
+            GameObjectEnum objectType = GameObjectEnum.GroundTitle;
             Rigidbody objectInTrigger;
 
             if (groundTitles.TryGetValue(objectHash, out objectInTrigger))
@@ -87,8 +88,7 @@ namespace ZigZag.Gameplay
             else
             {
                 if (!crystalTitles.TryGetValue(objectHash, out objectInTrigger)) return;
-                Debug.Log(objectInTrigger);
-                objectType = GameTitle.CrystaleTitle;
+                objectType = GameObjectEnum.CrystaleTitle;
                 crystalTitles.Remove(objectHash);
             }
 
@@ -99,7 +99,7 @@ namespace ZigZag.Gameplay
         {
             Vector3 createPoint = Vector3.zero;
 
-            var titleObj = _pool.GetObjectInPool(GameTitle.GroundTitle);
+            var titleObj = _pool.GetObjectInPool(GameObjectEnum.GroundTitle);
 
             if (_lastGroundTitle is null)
             {
@@ -121,7 +121,7 @@ namespace ZigZag.Gameplay
         public override void RuntimeCreateCrystalTitle()
         {
             if (_lastGroundTitle is null || !generator.CheckChanceByWeight(_crystalChance)) return;
-            var crystal = _pool.GetObjectInPool(GameTitle.CrystaleTitle);
+            var crystal = _pool.GetObjectInPool(GameObjectEnum.CrystaleTitle);
             crystal.position = _lastGroundTitle.position + Vector3.up * 2.8f;//float - offset
 
             crystalTitles.Add(crystal.gameObject.GetHashCode(), crystal);
@@ -129,7 +129,7 @@ namespace ZigZag.Gameplay
 
         private void CreateStartField()
         {
-            var title = _pool.GetObjectInPool(GameTitle.GroundTitle);
+            var title = _pool.GetObjectInPool(GameObjectEnum.GroundTitle);
             title.transform.localScale += (Vector3.right * 2 + Vector3.forward * 2) * _groundTitleOffset;
             title.position = Vector3.zero;
             title.position += Vector3.forward * 2.45f;
@@ -143,17 +143,18 @@ namespace ZigZag.Gameplay
             if(_startTitleHash != 0)
             {
                 groundTitles[_startTitleHash].transform.localScale -= (Vector3.right * 2 + Vector3.forward * 2) * _groundTitleOffset;
+                _startTitleHash = 0;
             }
 
             foreach (var ground in groundTitles)
             {
-                _pool.ReturnObjectInPool(GameTitle.GroundTitle, ground.Value);
+                _pool.ReturnObjectInPool(GameObjectEnum.GroundTitle, ground.Value);
             }
             groundTitles.Clear();
 
             foreach (var crystal in crystalTitles)
             {
-                _pool.ReturnObjectInPool(GameTitle.CrystaleTitle, crystal.Value);
+                _pool.ReturnObjectInPool(GameObjectEnum.CrystaleTitle, crystal.Value);
             }
             crystalTitles.Clear();
 

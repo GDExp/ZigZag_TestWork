@@ -13,12 +13,14 @@ namespace ZigZag.Gameplay
         private const string DeadTriggerTag = "Dead Trigger";
         private GameController _gameController;
         private Rigidbody _playerRB;
+
         private event Action<int> TriggerAction;
+        public event Action<Vector3> FXTriggerAction;
 
         private float _gameSpeed;
         private sbyte _side = 1;
 
-        public void PlayerSetup(GameController gameController, BaseGameField gameField )
+        public void PlayerSetup(GameController gameController, BaseGameField gameField)
         {
             _playerRB = GetComponent<Rigidbody>();
 
@@ -62,6 +64,7 @@ namespace ZigZag.Gameplay
         private void OnTriggerEnter(Collider other)
         {
             TriggerAction?.Invoke(other.gameObject.GetHashCode());
+            FXTriggerAction?.Invoke(other.transform.position);
             _gameController.GameCanvas.AddScoreInText();
         }
     }

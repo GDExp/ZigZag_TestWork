@@ -19,4 +19,5 @@ MonoBehaviour:
     type: 3}
   crystalPrefab: {fileID: 367916271459235340, guid: ae4c2beb2d7fb9a4abe27eed9f24e082,
     type: 3}
-  sparkPrefab: {fileID: 0}
+  sparkPrefab: {fileID: 8650625354555818143, guid: c5d1f0735f8d1eb4ebd0ed7c65e4f61d,
+    type: 3}

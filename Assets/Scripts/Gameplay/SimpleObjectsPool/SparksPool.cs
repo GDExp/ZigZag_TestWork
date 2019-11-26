@@ -3,28 +3,27 @@ using ZigZag.GameCore;
 
 namespace ZigZag.Gameplay
 {
-    sealed class SparksPool : BaseObjectsPool<ParticleSystem, int>
+    sealed class SparksPool : BaseObjectsPool<ParticleSystem, GameObjectEnum>
     {
         private ParticleSystem _crystalSparkPrefab;
 
-        public SparksPool(BaseGameSetupSO setupSO) : base()
+        public SparksPool(GameSetup setup) : base()
         {
-            _crystalSparkPrefab = setupSO.sparkPrefab;
+            _crystalSparkPrefab = setup.CurrentGameSetup.sparkPrefab;
         }
 
         public override void ActiveObjectInScene(ParticleSystem poolObject)
         {
-            throw new System.NotImplementedException();
         }
 
-        public override ParticleSystem CreateNewObject(int key)
+        public override ParticleSystem CreateNewObject(GameObjectEnum key)
         {
-            throw new System.NotImplementedException();
+            return MonoBehaviour.Instantiate(_crystalSparkPrefab);
         }
 
         public override void HideObjectInScene(ParticleSystem poolObject)
         {
-            throw new System.NotImplementedException();
+            poolObject.transform.position = Vector3.one * 888f;
         }
     }
 }
